@@ -7,7 +7,10 @@ const mongoose = require("mongoose");
 const { mongoURI } = require("./config/keys");
 // API Routes
 const users = require("./routes/api/users");
+const auth = require("./routes/api/auth");
 
+// Static Files
+app.use(express.static("public"));
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -21,6 +24,7 @@ app.get("/", (req, res) => res.send("Hello Docker"));
 
 // Use Routes
 app.use("/api/users", users);
+app.use("/api/auth", auth);
 
 const port = process.env.PORT || 5000;
 

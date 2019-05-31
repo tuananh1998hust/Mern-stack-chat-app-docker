@@ -26,7 +26,7 @@ router.post("/", validateRegisterInput, (req, res) => {
   const { name, email, password } = req.body;
   const avatar = "/avatar/default-avatar";
 
-  User.findOne({ name }).then(user => {
+  User.findOne({ email }).then(user => {
     // Check User
     if (user) {
       return res.status(400).json({ msg: ["User Is Already Exist"] });
