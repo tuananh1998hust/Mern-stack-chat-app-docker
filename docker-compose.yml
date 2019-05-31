@@ -1,0 +1,38 @@
+version: "3"
+services:
+  app:
+    container_name: docker-chat-app
+    restart: always
+    build: .
+    volumes:
+      - .:/usr/src/app
+    command: npm run server
+    ports:
+      - "5000:5000"
+    links:
+      - mongo
+    networks:
+      - overlay
+  client:
+    container_name: docker-chat-app-client
+    build: .
+    volumes:
+      - ./client:/usr/src/app
+    command: npm run start
+    ports:
+      - "3000:3000"
+    links:
+      - app
+    networks:
+      - overlay
+  mongo:
+    container_name: mongo
+    volumes:
+      - ./data:/data/db
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - overlay
+networks:
+  overlay:
