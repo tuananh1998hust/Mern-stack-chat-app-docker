@@ -9,6 +9,8 @@ const User = require("../../models/users");
 const { secretOrKey } = require("../../config/keys");
 // Validate Input
 const validateLoginInput = require("../../validation/login");
+// Middleware
+const auth = require("../../middleware/auth");
 
 // @route   POST api/auth
 // @desc    Login
@@ -40,6 +42,15 @@ router.post("/", validateLoginInput, (req, res) => {
       );
     });
   });
+});
+
+// @route   GET api/auth/user
+// @desc    Get Profile User Current
+// @access  Private
+router.get("/user", auth, (req, res) => {
+  User.findById(req.user.id)
+    .select("-password")
+    .then(user => res.json(user));
 });
 
 module.exports = router;
