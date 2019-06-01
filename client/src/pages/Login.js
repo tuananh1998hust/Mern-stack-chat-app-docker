@@ -45,9 +45,10 @@ class Login extends Component {
 
   render() {
     const { email, password } = this.state;
-    const { msg, isAuthenticated } = this.props.user;
+    const { msg } = this.props.user;
+    const token = localStorage.getItem("token");
 
-    if (isAuthenticated) {
+    if (token) {
       return <Redirect to="/home" />;
     }
 

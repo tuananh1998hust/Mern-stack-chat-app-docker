@@ -5,15 +5,18 @@ import {
   LOGIN_FAIL,
   AUTH_ERR,
   LOGOUT,
-  LOAD_USER
+  LOAD_USER,
+  LOAD_USERLIST,
+  SET_CHAT_WITH_USER
 } from "../actions/types";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  isAuthenticated: false,
   user: null,
   loading: true,
-  msg: []
+  msg: [],
+  userList: [],
+  chatWithUser: null
 };
 
 export default function(state = initialState, action) {
@@ -21,7 +24,8 @@ export default function(state = initialState, action) {
     case LOAD_USER:
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
+        loading: false
       };
 
     case LOGIN_SUCCESS:
@@ -29,7 +33,6 @@ export default function(state = initialState, action) {
       localStorage.setItem("token", action.payload.token);
       return {
         ...state,
-        isAuthenticated: true,
         loading: false
       };
 
@@ -38,7 +41,6 @@ export default function(state = initialState, action) {
       localStorage.removeItem("token");
       return {
         ...state,
-        isAuthenticated: null,
         user: null,
         loading: true,
         msg: action.payload.msg
@@ -48,10 +50,21 @@ export default function(state = initialState, action) {
     case LOGOUT:
       return {
         ...state,
-        isAuthenticated: null,
         user: null,
         loading: true,
         msg: []
+      };
+
+    case LOAD_USERLIST:
+      return {
+        ...state,
+        userList: action.payload
+      };
+
+    case SET_CHAT_WITH_USER:
+      return {
+        ...state,
+        chatWithUser: state.userList.find(user => user._id === action.payload)
       };
 
     default:

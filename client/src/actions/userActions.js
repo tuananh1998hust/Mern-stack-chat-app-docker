@@ -6,7 +6,9 @@ import {
   AUTH_ERR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  LOAD_USERLIST,
+  SET_CHAT_WITH_USER
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 
@@ -57,5 +59,20 @@ export const registerUser = user => dispatch => {
 export const logout = () => {
   return {
     type: LOGOUT
+  };
+};
+
+// load userList
+export const loadUserList = () => dispatch => {
+  axios
+    .get("/api/users")
+    .then(res => dispatch({ type: LOAD_USERLIST, payload: res.data }));
+};
+
+// Set Chat With User
+export const setChatWithUser = id => {
+  return {
+    type: SET_CHAT_WITH_USER,
+    payload: id
   };
 };

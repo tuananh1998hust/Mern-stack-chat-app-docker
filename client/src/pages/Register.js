@@ -47,9 +47,10 @@ class Register extends Component {
 
   render() {
     const { name, email, password, password2 } = this.state;
-    const { msg, isAuthenticated } = this.props.user;
+    const { msg } = this.props.user;
+    const token = localStorage.getItem("token");
 
-    if (isAuthenticated) {
+    if (token) {
       return <Redirect to="/home" />;
     }
 
