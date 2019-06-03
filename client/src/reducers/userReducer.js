@@ -7,7 +7,8 @@ import {
   LOGOUT,
   LOAD_USER,
   LOAD_USERLIST,
-  SET_CHAT_WITH_USER
+  SET_CHAT_WITH_USER,
+  UPDATE_AVATAR
 } from "../actions/types";
 
 const initialState = {
@@ -65,6 +66,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         chatWithUser: state.userList.find(user => user._id === action.payload)
+      };
+
+    case UPDATE_AVATAR:
+      return {
+        ...state,
+        userList: state.userList.map(user => {
+          if (user._id === action.payload._id) {
+            user = action.payload;
+          }
+
+          return user;
+        })
       };
 
     default:

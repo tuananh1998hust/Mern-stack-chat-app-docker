@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -14,37 +15,62 @@ class MessList extends Component {
     const { messList, loading } = this.props.message;
     const { user, chatWithUser } = this.props.user;
     return (
-      <div>
+      <div style={{ overflow: "auto", height: "80vh" }}>
         {loading ? (
           <Spinner style={{ width: "3rem", height: "3rem" }} />
         ) : user && chatWithUser ? (
-          messList
-            .filter(mess => {
-              return (
-                (mess.from === user._id && mess.to === chatWithUser._id) ||
-                (mess.from === chatWithUser._id && mess.to === user._id)
-              );
-            })
-            .map(mess => (
-              <div key={mess._id}>
-                <p className="user-name mb-0 ml-5" style={{ marginLeft: "50" }}>
-                  {mess.from === user._id ? user.name : chatWithUser.name}
-                </p>
-                <div className="d-flex align-items-center mb-3">
-                  <img
-                    src={
-                      mess.from === user._id
-                        ? `${user.avatar}.png`
-                        : `${chatWithUser.avatar}.png`
-                    }
-                    alt="avatar"
-                    width="48"
-                    height="48"
-                  />
-                  <p className="mb-0 ml-3">{mess.mess}</p>
+          <div>
+            <Link
+              className="chat-header text-center"
+              to={`/profile/${chatWithUser._id}`}
+              style={{
+                fontSize: "28px",
+                fontWeight: "600",
+                color: "#000",
+                marginBottom: "25px",
+                padding: "10px",
+                borderBottom: "1px solid #DDD",
+                backgroundColor: "#88C2DE",
+                display: "block"
+              }}
+            >
+              {chatWithUser.name}
+            </Link>
+            {messList
+              .filter(mess => {
+                return (
+                  (mess.from === user._id && mess.to === chatWithUser._id) ||
+                  (mess.from === chatWithUser._id && mess.to === user._id)
+                );
+              })
+              .map(mess => (
+                <div key={mess._id}>
+                  <div className="d-flex align-items-center mb-3">
+                    <img
+                      src={
+                        mess.from === user._id
+                          ? `${user.avatar}.png`
+                          : `${chatWithUser.avatar}.png`
+                      }
+                      alt="avatar"
+                      width="48"
+                      height="48"
+                    />
+                    <p
+                      className="mb-0 ml-3"
+                      style={{
+                        padding: "5px 10px",
+                        borderRadius: "20px",
+                        backgroundColor:
+                          mess.from === user._id ? "#DDD" : "#88C2DE"
+                      }}
+                    >
+                      {mess.mess}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))
+              ))}
+          </div>
         ) : null}
       </div>
     );

@@ -10,6 +10,7 @@ import { loadUser } from "./actions/userActions";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 
 const PrivateRoute = ({ component: Component, token, ...rest }) => (
   <Route
@@ -32,6 +33,7 @@ class App extends Component {
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
           <PrivateRoute path="/home" exact component={HomePage} token={token} />
+          <Route exact path="/profile/:id" component={Profile} />
         </div>
       </Router>
     );

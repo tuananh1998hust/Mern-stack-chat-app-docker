@@ -8,7 +8,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   LOAD_USERLIST,
-  SET_CHAT_WITH_USER
+  SET_CHAT_WITH_USER,
+  UPDATE_AVATAR
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 
@@ -75,4 +76,11 @@ export const setChatWithUser = id => {
     type: SET_CHAT_WITH_USER,
     payload: id
   };
+};
+
+// Update avatar
+export const updateAvatar = newAvatar => dispatch => {
+  axios
+    .patch("/api/users/avatar", newAvatar)
+    .then(res => dispatch({ type: UPDATE_AVATAR, payload: res.data }));
 };

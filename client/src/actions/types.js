@@ -9,3 +9,4 @@ export const LOAD_USERLIST = "LOAD_USERLIST";
 export const SET_CHAT_WITH_USER = "SET_CHAT_WITH_USER";
 export const LOAD_MESSAGES = "LOAD_MESSAGES";
 export const SEND_MESSAGE = "SEND_MESSAGE";
+export const UPDATE_AVATAR = "UPDATE_AVATAR";
