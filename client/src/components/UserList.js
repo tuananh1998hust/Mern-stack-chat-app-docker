@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+// Components
+import MessHeader from "./MessHeader";
+// Actions
 import { loadUserList, setChatWithUser } from "../actions/userActions";
 
 class UserList extends Component {
@@ -22,16 +24,7 @@ class UserList extends Component {
       <div>
         {userList && user ? (
           <div>
-            <Link
-              className="text-center mt-2 p-2"
-              style={{
-                borderBottom: "1px solid #DDD",
-                display: "block"
-              }}
-              to={`/profile/${user._id}`}
-            >
-              About Me
-            </Link>
+            <MessHeader user={user} />
             {userList
               .filter(userItem => userItem._id !== user._id)
               .map(userItem => (
@@ -44,7 +37,7 @@ class UserList extends Component {
                   <img
                     width="48"
                     height="48"
-                    src={`${userItem.avatar}.png`}
+                    src={userItem.avatar}
                     alt="avatar"
                     className="border-rounded-circle"
                   />

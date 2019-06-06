@@ -29,6 +29,7 @@ services:
     container_name: mongo
     volumes:
       - ./data:/data/db
+    user: "1000:1000"
     image: mongo
     ports:
       - "27017:27017"

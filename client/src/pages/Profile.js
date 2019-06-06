@@ -27,7 +27,7 @@ class Profile extends Component {
         {userCurrent ? (
           <Row className="mt-5">
             <Col sm="6" md={{ size: "2", offset: "3" }}>
-              <img src={`${userCurrent.avatar}.png`} alt="avatar" />
+              <img src={userCurrent.avatar} alt="avatar" />
             </Col>
             <Col sm="6" md="3">
               <p className="mb-0 p-2">{userCurrent.name}</p>

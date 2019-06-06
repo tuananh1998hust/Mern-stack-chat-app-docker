@@ -33,7 +33,7 @@ io.on("connection", socket => {
   });
 });
 
-app.get("/", (req, res) => res.send("Hello Docker"));
+app.get("/", (req, res) => res.send("Hello Chat App Docker"));
 
 // Use Routes
 app.use("/api/users", users);

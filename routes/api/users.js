@@ -16,7 +16,7 @@ const auth = require("../../middleware/auth");
 
 // Set Storage Engine
 const storage = multer.diskStorage({
-  destination: "public/uploads/",
+  destination: "public/avatar/",
   filename: function(req, file, cb) {
     cb(
       null,
@@ -63,7 +63,7 @@ router.get("/", (req, res) => {
 // @access  Public
 router.post("/", validateRegisterInput, (req, res) => {
   const { name, email, password } = req.body;
-  const avatar = "/avatar/default-avatar";
+  const avatar = "/avatar/default-avatar.png";
 
   User.findOne({ email }).then(user => {
     // Check User
@@ -93,7 +93,7 @@ router.post("/", validateRegisterInput, (req, res) => {
             (err, token) => {
               if (err) throw err;
 
-              res.json(token);
+              res.json({ token });
             }
           );
         });

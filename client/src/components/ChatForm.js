@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Input } from "reactstrap";
+import { Form, Input } from "reactstrap";
 import io from "socket.io-client";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -21,20 +21,21 @@ class ChatForm extends Component {
     this.setState({ mess: e.target.value });
   };
 
-  onSubmit = e => {
-    e.preventDefault();
+  onKeyUp = e => {
     const { mess } = this.state;
     const { user, chatWithUser } = this.props.user;
 
-    const newMess = {
-      from: user._id,
-      to: chatWithUser._id,
-      mess
-    };
+    if (e.keyCode === 13) {
+      const newMess = {
+        from: user._id,
+        to: chatWithUser._id,
+        mess
+      };
 
-    this.socket.emit("send-mess", newMess);
+      this.socket.emit("send-mess", newMess);
 
-    this.setState({ mess: "" });
+      this.setState({ mess: "" });
+    }
   };
 
   onSocket = newMess => {
@@ -45,21 +46,15 @@ class ChatForm extends Component {
     const { mess } = this.state;
 
     return (
-      <div style={this.props.style}>
-        <Form onSubmit={this.onSubmit}>
-          <FormGroup>
-            <Input
-              type="textarea"
-              placeholder="Add New Messages..."
-              value={mess}
-              onChange={this.onChange}
-            />
-          </FormGroup>
-          <Button block color="success">
-            Send
-          </Button>
-        </Form>
-      </div>
+      <Form onSubmit={this.onSubmit}>
+        <Input
+          type="textarea"
+          placeholder="Add New Messages..."
+          value={mess}
+          onChange={this.onChange}
+          onKeyUp={this.onKeyUp}
+        />
+      </Form>
     );
   }
 }
