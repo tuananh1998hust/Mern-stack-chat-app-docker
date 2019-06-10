@@ -33,7 +33,7 @@ io.on("connection", socket => {
   });
 });
 
-app.get("/", (req, res) => res.send("Hello Chat App Docker"));
+// app.get("/", (req, res) => res.send("Hello Chat App Docker"));
 
 // Use Routes
 app.use("/api/users", users);
@@ -42,4 +42,13 @@ app.use("/api/messages", messages);
 
 const port = process.env.PORT || 5000;
 
-http.listen(port, () => console.log(`Server is running on port ${port}`));
+function start() {
+  http.listen(port, () => console.log(`Server is running on port ${port}`));
+}
+
+module.exports = {
+  start,
+  app
+};
+
+start();

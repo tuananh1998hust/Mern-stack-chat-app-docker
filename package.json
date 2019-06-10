@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "test": "jest --watchAll"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "keywords": [],
   "author": "",
@@ -20,8 +24,9 @@
     "validator": "^11.0.0"
   },
   "devDependencies": {
-    "jasmine": "^3.4.0",
+    "@types/jest": "^24.0.13",
+    "jest": "^24.8.0",
     "nodemon": "^1.19.1",
-    "request": "^2.88.0"
+    "supertest": "^4.0.2"
   }
 }
