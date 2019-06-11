@@ -3,8 +3,6 @@ const router = express();
 
 // Message Model
 const Message = require("../../models/messages");
-// Middleware
-const auth = require("../../middleware/auth");
 
 // @route   GET api/messages
 // @desc    Get All Messages

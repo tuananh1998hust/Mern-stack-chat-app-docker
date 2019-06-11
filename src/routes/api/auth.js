@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 // User Model
 const User = require("../../models/users");
 // Keys
-const { secretOrKey } = require("../../config/keys");
+const { secretOrKey } = require("../../../config/keys");
 // Validate Input
 const validateLoginInput = require("../../validation/login");
 // Middleware

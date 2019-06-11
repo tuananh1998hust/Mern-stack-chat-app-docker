@@ -8,7 +8,7 @@ const path = require("path");
 // User Model
 const User = require("../../models/users");
 // Keys
-const { secretOrKey } = require("../../config/keys");
+const { secretOrKey } = require("../../../config/keys");
 // Validate Input
 const validateRegisterInput = require("../../validation/register");
 // Middleware
